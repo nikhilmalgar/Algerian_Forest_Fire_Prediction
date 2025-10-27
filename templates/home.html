@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔥 FWI Prediction | Ridge ML Model</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 25px 30px;
+      width: 360px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #00e0ff;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      margin-bottom: 12px;
+      height: 38px;
+      font-size: 0.9rem;
+    }
+
+    .form-control::placeholder {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .btn-custom {
+      background: linear-gradient(90deg, #00e0ff, #007cf0);
+      border: none;
+      width: 100%;
+      padding: 10px;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(90deg, #007cf0, #00e0ff);
+      transform: scale(1.05);
+    }
+
+    /* ---------- Animated Result Card ---------- */
+    .result-card {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 224, 255, 0.3);
+      text-align: center;
+      animation: fadeSlideUp 0.8s ease forwards;
+      transform: translateY(40px);
+      opacity: 0;
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prediction-value {
+      color: #00e0ff;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 224, 255, 0.7), 0 0 20px rgba(0, 224, 255, 0.4);
+      animation: glowPulse 1.8s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from {
+        text-shadow: 0 0 10px rgba(0, 224, 255, 0.8), 0 0 20px rgba(0, 224, 255, 0.4);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(0, 224, 255, 1), 0 0 30px rgba(0, 224, 255, 0.6);
+      }
+    }
+
+    .result-text {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>🔥 FWI Prediction</h1>
+
+    <form
+      action="{{ url_for('predict_datapoint') }}"
+      method="post"
+      onsubmit="showLoader()"
+    >
+      <input type="number" step="any" name="Temperature" class="form-control" placeholder="Temperature (°C)" required value="{{ Temperature or '' }}">
+      <input type="number" step="any" name="RH" class="form-control" placeholder="Relative Humidity (%)" required value="{{ RH or '' }}">
+      <input type="number" step="any" name="Ws" class="form-control" placeholder="Wind Speed (km/h)" required value="{{ Ws or '' }}">
+      <input type="number" step="any" name="Rain" class="form-control" placeholder="Rainfall (mm)" required value="{{ Rain or '' }}">
+      <input type="number" step="any" name="FFMC" class="form-control" placeholder="FFMC" required value="{{ FFMC or '' }}">
+      <input type="number" step="any" name="DMC" class="form-control" placeholder="DMC" required value="{{ DMC or '' }}">
+      <input type="number" step="any" name="ISI" class="form-control" placeholder="ISI" required value="{{ ISI or '' }}">
+      <input type="number" step="any" name="Classes" class="form-control" placeholder="Classes" required value="{{ Classes or '' }}">
+      <input type="number" step="any" name="Region" class="form-control" placeholder="Region" required value="{{ Region or '' }}">
+      <button type="submit" class="btn btn-custom mt-2">Predict 🔍</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result-card">
+      <div class="result-text">🔥 The FWI Prediction is</div>
+      <div class="prediction-value">{{ prediction }}</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
