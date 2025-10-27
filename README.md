@@ -108,7 +108,9 @@ pickle
 **Nikhil Malagar**  
 🎓 B.Tech CSE (AI & ML) @ B.L.D.E.A's V.P. Dr. P.G. Halakatti College of Engineering & Technology  
 💡 Passionate about AI, ML, and Full-Stack Development  
-🌐 [GitHub](https://github.com/yourusername) | [LinkedIn](https://linkedin.com/in/yourprofile)
+## 🌐 Socials:
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nikhil-malgar-549064262/)
+
 
 ---
 
